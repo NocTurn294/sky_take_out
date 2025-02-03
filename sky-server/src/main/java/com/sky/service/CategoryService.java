@@ -5,4 +5,6 @@ import com.sky.result.PageResult;
 
 public interface CategoryService {
     PageResult pageQuery(CategoryPageQueryDTO categoryPageQueryDTO);
+
+    void delete(Long id);
 }

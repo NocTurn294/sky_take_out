@@ -25,4 +25,9 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> records = page.getResult();
         return new PageResult(total, records);
     }
+
+    @Override
+    public void delete(Long id) {
+        categoryMapper.delete(id);
+    }
 }
