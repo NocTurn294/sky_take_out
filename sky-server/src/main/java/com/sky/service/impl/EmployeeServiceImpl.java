@@ -9,6 +9,7 @@ import com.sky.context.BaseContext;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
+import com.sky.dto.PasswordEditDTO;
 import com.sky.entity.Employee;
 import com.sky.exception.AccountLockedException;
 import com.sky.exception.AccountNotFoundException;
@@ -67,7 +68,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
-
     @Override
     public void save(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
@@ -85,7 +85,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
         PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
-        Page<Employee> page  = employeeMapper.pageQuery(employeePageQueryDTO);
+        Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
         long total = page.getTotal();
         List<Employee> records = page.getResult();
         return new PageResult(total, records);
@@ -117,4 +117,23 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.update(employee);
     }
 
+    @Override
+    public void updatePassword(PasswordEditDTO passwordEditDTO) {
+        Long empId = BaseContext.getCurrentId();
+        //就可以查到数据库的用户信息
+        Employee employee = employeeMapper.getById(empId);
+        //当前 前端传过来的oldPassword进行md5加密后
+        String pwd = DigestUtils.md5DigestAsHex(passwordEditDTO.getOldPassword().getBytes());
+        //进行对比
+        if (!pwd.equals(employee.getPassword())) {
+            //原密码错误
+            throw new PasswordErrorException("原密码错误");
+        }
+        //如果输入的原密码与数据库密码相同，则进行修改，把newPassword进行MD5加密存入数据库，密码修改成功
+        employee.setPassword(DigestUtils.md5DigestAsHex(passwordEditDTO.getNewPassword().getBytes()));
+        employee.setUpdateUser(empId);
+        employee.setUpdateTime(LocalDateTime.now());
+        employeeMapper.update(employee);
+
+    }
 }
