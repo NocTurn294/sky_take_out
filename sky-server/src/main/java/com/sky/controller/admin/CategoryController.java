@@ -1,6 +1,8 @@
 package com.sky.controller.admin;
 
+import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
+import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
@@ -33,6 +35,13 @@ public class CategoryController {
     public Result<String> startOrStop(@PathVariable Integer status,Long id){
         log.info("修改菜品目录状态：{}，{}",status,id);
         categoryService.startOrStop(status,id);
+        return Result.success();
+    }
+
+    @PutMapping
+    public Result update(@RequestBody CategoryDTO categoryDTO){
+        log.info("修改员工信息：{}",categoryDTO);
+        categoryService.update(categoryDTO);
         return Result.success();
     }
 }
