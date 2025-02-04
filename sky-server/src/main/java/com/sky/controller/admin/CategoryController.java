@@ -7,10 +7,7 @@ import com.sky.result.Result;
 import com.sky.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin/category")
@@ -30,6 +27,12 @@ public class CategoryController {
     public Result delete(Long id){
         log.info("删除菜品目录：{}",id);
         categoryService.delete(id);
+        return Result.success();
+    }
+    @PostMapping("/status/{status}")
+    public Result<String> startOrStop(@PathVariable Integer status,Long id){
+        log.info("修改菜品目录状态：{}，{}",status,id);
+        categoryService.startOrStop(status,id);
         return Result.success();
     }
 }
