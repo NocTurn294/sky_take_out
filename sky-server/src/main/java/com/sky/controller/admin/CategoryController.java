@@ -44,4 +44,10 @@ public class CategoryController {
         categoryService.update(categoryDTO);
         return Result.success();
     }
+    @PostMapping
+    public Result save(@RequestBody CategoryDTO categoryDTO){
+        log.info("新增菜品信息：{}",categoryDTO);
+        categoryService.save(categoryDTO);
+        return Result.success();
+    }
 }
