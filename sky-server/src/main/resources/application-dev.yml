@@ -6,3 +6,8 @@ sky:
     database: sky_take_out
     username: root
     password: Ww2225747913.
+  alioss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    access-key-id: LTAI5tL9bgDBrcTLbTLM1eg1
+    access-key-secret: sJNqmqBPfrMhgSol2mMO5lCuvzsewn
+    bucket-name: turnin-sky
