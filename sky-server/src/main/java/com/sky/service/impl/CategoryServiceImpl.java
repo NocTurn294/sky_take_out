@@ -68,4 +68,9 @@ public class CategoryServiceImpl implements CategoryService {
       // category.setUpdateUser(BaseContext.getCurrentId());
       categoryMapper.insert(category);
     }
+
+    @Override
+    public List<Category> list(Integer type) {
+        return categoryMapper.list(type);
+    }
 }
