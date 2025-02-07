@@ -9,4 +9,6 @@ public interface SetmealDishMapper {
 
 
     List<Long> getSetnealIdsByDishIds(List<Long> dishIds);
+
+
 }
