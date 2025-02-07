@@ -14,16 +14,21 @@ public interface SetmealService {
     void save(SetmealDTO setmealDTO);
 
     void deleteBatch(List<Long> ids);
+
     /**
      * 根据id查询套餐和关联的菜品数据
+     *
      * @param id
      * @return
-*/
-SetmealVO getByIdWithDish(Long id);
+     */
+    SetmealVO getByIdWithDish(Long id);
 
-/**
+    /**
      * 修改套餐
+     *
      * @param setmealDTO
-*/
-void update(SetmealDTO setmealDTO);
+     */
+    void update(SetmealDTO setmealDTO);
+
+    void startOrStop(Integer status, Long id);
 }
