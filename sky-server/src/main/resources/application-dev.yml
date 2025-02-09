@@ -11,3 +11,8 @@ sky:
     access-key-id: LTAI5tL9bgDBrcTLbTLM1eg1
     access-key-secret: sJNqmqBPfrMhgSol2mMO5lCuvzsewn
     bucket-name: turnin-sky
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+
